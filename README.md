@@ -12,7 +12,7 @@ git clone https://github.com/Jake-Ruston/JSONBrute.git
 
 ## Usage
 ```bash
-./jsonbrute.py -u 10.10.10.10 -d 'username=admin, password=FUZZ' -w rockyou.txt
+./jsonbrute.py -u 10.10.10.10 -w rockyou.txt -d "username=admin, password=FUZZ"
 ```
 The above will send the following payload, replacing *FUZZ* with every word in the wordlist:
 ```json
@@ -28,17 +28,17 @@ The above will send the following payload, replacing *FUZZ* with every word in t
 - [x] Make a request to the given URL for each word
 - [x] Send the given data to the URL for each word
 - [x] Replace the FUZZ keyword with each word
-- [ ] Move separate functionality into their own files
 - [ ] Error checking
 	- [ ] URL given
 	- [ ] Data given
 	- [ ] Wordlist given
 	- [ ] Request exception
 - [ ] Threading
+
+## TODO
+- [ ] Move separate functionality into their own files
+- [ ] Fix the `verbose` and `code` arguments in the help display
+- [ ] Use a more efficient way to replace the FUZZed word with the entry in the given wordlist
 - [x] Add extra argument for verbosity
 - [x] Add extra argument for status code
 - [ ] Add extra argument for user agent
-
-## TODO
-- [ ] Fix the `verbose` and `code` arguments in the help display
-- [ ] Use a more efficient way to replace the FUZZed word with the entry in the given wordlist
