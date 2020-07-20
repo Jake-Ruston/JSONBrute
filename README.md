@@ -2,6 +2,11 @@
 
 A simple JSON bruteforce tool for penetration testers or hobbyists.
 
+## Disclaimer
+I do not condone nor claim any responsibility for non-authorized use of this program.
+
+Use at your own discretion.
+
 ## Why is this useful?
 Have you ever been on an engagement where you've had to bruteforce a JSON API, and industry standard tools such as [hydra](https://github.com/vanhauser-thc/thc-hydra) and [wfuzz](https://github.com/xmendez/wfuzz) can't handle the data type? That's where JSONBrute excels.
 
@@ -12,7 +17,7 @@ git clone https://github.com/Jake-Ruston/JSONBrute.git
 
 ## Usage
 ```bash
-./jsonbrute.py -u 10.10.10.10 -w rockyou.txt -d "username=admin, password=FUZZ"
+./jsonbrute.py -u 10.10.10.10 -w rockyou-100.txt -d "username=admin, password=FUZZ"
 ```
 The above will send the following payload, replacing *FUZZ* with every word in the wordlist:
 ```json
@@ -21,6 +26,7 @@ The above will send the following payload, replacing *FUZZ* with every word in t
 	"password": "FUZZ"
 }
 ```
+Note: The tool currently only accepts a username and password combination as I am busy currently studying for my OSCP. If you know python, it should not be difficult to edit the file yourself to satisfy your needs.
 
 ## Checklist
 - [x] Create an argument parser
@@ -28,6 +34,7 @@ The above will send the following payload, replacing *FUZZ* with every word in t
 - [x] Make a request to the given URL for each word
 - [x] Send the given data to the URL for each word
 - [x] Replace the FUZZ keyword with each word
+- [ ] Allow fields other than username/password to be used
 - [ ] Error checking
 	- [ ] URL given
 	- [ ] Data given

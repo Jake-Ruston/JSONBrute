@@ -40,7 +40,6 @@ class JSONBrute:
     def find(self, args, wordlist):
         from json import loads
         import requests
-        import sys
 
         for entry in wordlist:
             try:
@@ -63,16 +62,18 @@ class JSONBrute:
 
                 if request.status_code == args.code:
                     self.success(f"Password for {username} found: {password}")
-                    sys.exit()
+                    break
                 else:
                     if args.verbose:
                         self.warning(f"Incorrect password for {username}: {password}")
             except requests.ConnectionError:
                 self.error(f"Failed to connect to {args.url}")
-                sys.exit()
+                raise SystemExit()
             except KeyboardInterrupt:
                 self.error("Exiting...")
-                sys.exit()
+                raise SystemExit()
+            except Exception as err:
+                self.error(f"Unknown error, please create an issue on github explaining what you did with this error: {type(err)}")
         else:
             self.warning(f"Password for {username} not found")
 
