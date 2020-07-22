@@ -11,21 +11,10 @@ Use at your own discretion.
 Have you ever been on an engagement where you've had to bruteforce a JSON API, and industry standard tools such as [hydra](https://github.com/vanhauser-thc/thc-hydra) and [wfuzz](https://github.com/xmendez/wfuzz) can't handle the data type? That's where JSONBrute excels.
 
 ## Installation
-```bash
-git clone https://github.com/Jake-Ruston/JSONBrute.git
-```
+<img src="src/images/installation.png" alt="click the clone button" />
 
 ## Usage
-```bash
-./jsonbrute.py --url 10.10.10.10 --wordlist rockyou-100.txt --data "username=admin, password=FUZZ"
-```
-The above will send the following payload, replacing *FUZZ* with every word in the wordlist:
-```json
-{
-	"username": "admin",
-	"password": "FUZZ"
-}
-```
+<img src="src/images/usage.png" alt="use --help to view usage" />
 
 ## Checklist
 - [x] Create an argument parser
