@@ -17,7 +17,7 @@ git clone https://github.com/Jake-Ruston/JSONBrute.git
 
 ## Usage
 ```bash
-./jsonbrute.py -u 10.10.10.10 -w rockyou-100.txt -d "username=admin, password=FUZZ"
+./jsonbrute.py --url 10.10.10.10 --wordlist rockyou-100.txt --data "username=admin, password=FUZZ"
 ```
 The above will send the following payload, replacing *FUZZ* with every word in the wordlist:
 ```json
@@ -26,7 +26,6 @@ The above will send the following payload, replacing *FUZZ* with every word in t
 	"password": "FUZZ"
 }
 ```
-Note: The tool currently only accepts a username and password combination as I am busy currently studying for my OSCP. If you know python, it should not be difficult to edit the file yourself to satisfy your needs.
 
 ## Checklist
 - [x] Create an argument parser
@@ -34,7 +33,7 @@ Note: The tool currently only accepts a username and password combination as I a
 - [x] Make a request to the given URL for each word
 - [x] Send the given data to the URL for each word
 - [x] Replace the FUZZ keyword with each word
-- [ ] Allow fields other than username/password to be used
+- [x] Allow fields other than username/password to be used
 - [ ] Error checking
 	- [ ] URL given
 	- [ ] Data given
