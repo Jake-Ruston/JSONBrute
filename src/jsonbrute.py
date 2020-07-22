@@ -35,7 +35,12 @@ class JSONBrute:
         json = [pair.strip().split("=") for pair in json]
         json = {key: value for [key, value] in json}
 
-        return str(json)
+        return json
+
+    def parse_fuzzed_parameter(self, json):
+        fuzzed = list(json.keys())[list(json.values()).index("FUZZ")]
+
+        return fuzzed
 
     def find(self, args, wordlist):
         from json import loads
@@ -47,12 +52,12 @@ class JSONBrute:
                     "Content-Type": "application/json"
                 }
                 json = self.parse_json(args.data)
+                fuzzed = self.parse_fuzzed_parameter(json)
+
+                json = str(json)
                 json = json.replace("FUZZ", entry)
                 json = json.replace("'", "\"")
                 json = loads(json)
-
-                username = json["username"]
-                password = json["password"]
 
                 request = requests.post(args.url, headers=headers, json=json)
 
@@ -61,11 +66,11 @@ class JSONBrute:
                     args.code = 201
 
                 if request.status_code == args.code:
-                    self.success(f"Password for {username} found: {password}")
+                    self.success(f"Found \"{fuzzed}\": {json[fuzzed]}")
                     break
                 else:
                     if args.verbose:
-                        self.warning(f"Incorrect password for {username}: {password}")
+                        self.warning(f"Incorrect \"{fuzzed}\": {json[fuzzed]}")
             except requests.ConnectionError:
                 self.error(f"Failed to connect to {args.url}")
                 raise SystemExit()
@@ -73,9 +78,9 @@ class JSONBrute:
                 self.error("Exiting...")
                 raise SystemExit()
             except Exception as err:
-                self.error(f"Unknown error, please create an issue on github explaining what you did with this error: {type(err)}")
+                self.error(f"Unknown error, please create an issue on github explaining what you did with this error: {err}")
         else:
-            self.warning(f"Password for {username} not found")
+            self.warning(f"\"{fuzzed}\" not found")
 
     def run(self):
         args = self.parse_arguments()
