@@ -25,7 +25,7 @@ class JSONBrute:
         return parser.parse_args()
 
     def parse_wordlist(self, file):
-        with open(file) as data:
+        with open(file, mode="r", encoding="iso-8859-1") as data:
             wordlist = data.read().splitlines()
 
             return wordlist
