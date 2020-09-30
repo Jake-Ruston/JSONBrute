@@ -2,6 +2,12 @@
 
 A simple JSON bruteforce tool for penetration testers or hobbyists.
 
+This tool is nowhere near finished and thus are some errors. Here are common ones that I am too busy to currently fix:
+
+- Schema must be applied (http/https)
+- The (icons) sometimes display incorrectly ???
+- Big wordlists may destroy your memory so I suggest using a subset of a wordlist until I can implement async or threading
+
 ## Disclaimer
 I do not condone nor claim any responsibility for non-authorized use of this program.
 
